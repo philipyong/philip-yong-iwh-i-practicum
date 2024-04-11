@@ -5,4 +5,31 @@ html
         meta(name="viewport" content="width=device-width, initial-scale=1")
         link(rel="stylesheet", href="/css/style.css")
     body    
+        .form-wrapper
+            form(method="POST")
+                label(for="name") New Pokemon Name
+                input(type="text" name="name" required)
+                label(for="pokedex_id") New Pokedex ID
+                input(type="text" name="pokedex_id" required)
+                label(for="pokemon_type") New Pokemon Type/Types
+                select(name="pokemon_type" multiple required)
+                    option(value="Normal") Normal
+                    option(value="Fire") Fire
+                    option(value="Water") Water
+                    option(value="Electric") Electric
+                    option(value="Grass") Grass
+                    option(value="Ice") Ice
+                    option(value="Fighting") Fighting
+                    option(value="Poison") Poison
+                    option(value="Ground") Ground
+                    option(value="Flying") Flying
+                    option(value="Psychic") Psychic
+                    option(value="Bug") Bug
+                    option(value="Rock") Rock
+                    option(value="Ghost") Ghost
+                    option(value="Dragon") Dragon
+                    option(value="Dark") Dark
+                    option(value="Steel") Steel
+                    option(value="Fairy") Fairy
+                input(type="submit" value="Submit")
         a(href="/") Return to the homepage
