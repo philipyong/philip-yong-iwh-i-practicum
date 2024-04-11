@@ -1,0 +1,21 @@
+doctype html
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+        h1 Pokemon Table
+        a(href="/update-cobj") Add/Update this table
+        table
+            thead
+                tr
+                    th Name
+                    th Pokedex ID
+                    th Type
+            tbody
+                each pokemon in data
+                    tr
+                        td= pokemon.properties.name
+                        td= pokemon.properties.pokedex_id
+                        td= pokemon.properties.pokemon_type

@@ -15,7 +15,37 @@ const PRIVATE_APP_ACCESS = process.env.ACCESS_TOKEN;
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 
 app.get("/", async (req, res) => {
-  res.send("Hello World!");
+  const pokemons = "https://api.hubspot.com/crm/v3/objects/pokemons";
+  const get = {
+    properties: ["name", "pokedex_id", "pokemon_type"],
+  };
+
+  const headers = {
+    Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+    "Content-Type": "application/json",
+  };
+  try {
+    const resp = await axios.get(pokemons, {
+      params: get,
+      headers,
+      paramsSerializer: function handleQuery(query) {
+        // this will process params
+        // This should query the params properly for you.
+        return Object.entries(query)
+          .map(([key, value], i) =>
+            Array.isArray(value)
+              ? `${key}=${value.join("&" + key + "=")}`
+              : `${key}=${value}`
+          )
+          .join("&");
+      },
+    });
+    const data = resp.data.results;
+    console.log(data);
+    res.render("homepage", { title: "Pokemons | HubSpot APIs", data });
+  } catch (error) {
+    console.error(error);
+  }
 });
 
 // TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
